@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BloodPressureObservationRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BloodPressureObservationRepository::class)]
@@ -12,6 +13,9 @@ class BloodPressureObservation
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+
+    #[ORM\Column(type: 'datetime', name: 'observation_time')]
+    private $observationTime;
 
     #[ORM\Column(type: 'integer')]
     private $systolic;
@@ -28,6 +32,18 @@ class BloodPressureObservation
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getObservationTime(): ?DateTimeInterface
+    {
+        return $this->observationTime;
+    }
+
+    public function setObservationTime(DateTimeInterface $observationTime): self
+    {
+        $this->observationTime = $observationTime;
+
+        return $this;
     }
 
     public function getSystolic(): ?int
@@ -81,6 +97,7 @@ class BloodPressureObservation
     public function toJson() {
         return json_encode([
             'id' => $this->id,
+            'observationTime' => $this->observationTime,
             'systolic' => $this->systolic,
             'diastolic' => $this->diastolic,
             'pulse' => $this->pulse,

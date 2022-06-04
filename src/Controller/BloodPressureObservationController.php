@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\BloodPressureObservation;
 use App\Repository\BloodPressureObservationRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +27,11 @@ class BloodPressureObservationController extends AbstractController
      */
     public function add(Request $request, BloodPressureObservationRepository $bloodPressureObservationRepository): Response
     {
+        $observationTime = new DateTime($request->request->get('date') . ' ' . $request->request->get('time'));
+
         $bloodPressureObservation = new BloodPressureObservation();
         $bloodPressureObservation
+            ->setObservationTime($observationTime)
             ->setSystolic($request->request->get('systolic'))
             ->setDiastolic($request->request->get('diastolic'))
             ->setPulse($request->request->get('pulse'))

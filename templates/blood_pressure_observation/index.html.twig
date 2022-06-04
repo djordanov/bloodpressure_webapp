@@ -4,6 +4,14 @@
 
 <form method="post">
   <div>
+    <label for="date">Date</label>
+    <input type="date" name="date" required pattern="\d{4}-\d{2}-\d{2}">
+  </div>
+  <div>
+    <label for="time">Time</label>
+    <input type="time" name="time" required>
+  </div>
+  <div>
     <label for="systolic">Systolic Blood Pressure</label>
     <input type="number" name="systolic" required>
   </div>
@@ -27,6 +35,8 @@
 <table>
     <thead>
         <tr>
+            <td>Date</td>
+            <td>Time</td>
             <td>Systolic</td>
             <td>Diastolic</td>
             <td>Pulse</td>
@@ -36,6 +46,8 @@
     </thead>
     {% for bloodPressureObservation in bloodPressureObservations %}
         <tr>
+            <td>{{ bloodPressureObservation.observationTime | format_datetime(pattern='YYYY-MM-DD') }}</td>
+            <td>{{ bloodPressureObservation.observationTime | format_datetime(pattern='HH:MM') }}</td>
             <td>{{ bloodPressureObservation.systolic }}</td>
             <td>{{ bloodPressureObservation.diastolic }}</td>
             <td>{{ bloodPressureObservation.pulse }}</td>

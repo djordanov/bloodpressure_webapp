@@ -77,4 +77,14 @@ class BloodPressureObservation
 
         return $this;
     }
+
+    public function toJson() {
+        return json_encode([
+            'id' => $this->id,
+            'systolic' => $this->systolic,
+            'diastolic' => $this->diastolic,
+            'pulse' => $this->pulse,
+            'comment' => $this->comment
+        ]);
+    }
 }

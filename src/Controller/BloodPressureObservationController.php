@@ -21,7 +21,7 @@ class BloodPressureObservationController extends AbstractController
         return $this->render('blood_pressure_observation/index.html.twig', ['bloodPressureObservations' => $bloodPressureObservations]);
     }
 
-      /**
+    /**
      * @Route("/bloodpressureobservation", methods={"POST"})
      */
     public function add(Request $request, BloodPressureObservationRepository $bloodPressureObservationRepository): Response
@@ -36,5 +36,15 @@ class BloodPressureObservationController extends AbstractController
         $bloodPressureObservationRepository->add($bloodPressureObservation, true);
         
         return new RedirectResponse('/bloodpressureobservation');
+    }
+    
+    /**
+     * @Route("/bloodpressureobservation/{id}", methods={"DELETE"})
+     */
+    public function delete(int $id, BloodPressureObservationRepository $bloodPressureObservationRepository): Response
+    {
+        $bloodPressureObservation = $bloodPressureObservationRepository->find($id);
+        $bloodPressureObservationRepository->remove($bloodPressureObservation, true);
+        return new Response('');
     }
 }

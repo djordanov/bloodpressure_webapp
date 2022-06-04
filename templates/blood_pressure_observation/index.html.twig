@@ -31,6 +31,7 @@
             <td>Diastolic</td>
             <td>Pulse</td>
             <td>Comment</td>
+            <td></td>
         </tr>
     </thead>
     {% for bloodPressureObservation in bloodPressureObservations %}
@@ -39,6 +40,7 @@
             <td>{{ bloodPressureObservation.diastolic }}</td>
             <td>{{ bloodPressureObservation.pulse }}</td>
             <td>{{ bloodPressureObservation.comment }}</td>
+            <td><button onclick = "fetch('/bloodpressureobservation/{{ bloodPressureObservation.id }}', {method: 'DELETE'}).then(data => {window.location = '/bloodpressureobservation'})">Delete</button></td>
         </tr>
     {% endfor %}
 <table>
